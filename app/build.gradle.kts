@@ -3,7 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.google.services)
-    alias(libs.plugins.firebase.crashlytics)
+    // TODO: 실제 Firebase 프로젝트 연결(google-services.json 교체) 후 주석 해제
+    // alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.navigation.safeargs)
 }
 
@@ -127,8 +128,9 @@ dependencies {
 
     // ── Firebase ─────────────────────────────────────────────────────────
     implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
-    implementation(libs.firebase.crashlytics)
+    // TODO: 실제 Firebase 프로젝트 연결(google-services.json 교체) 후 주석 해제
+    // implementation(libs.firebase.analytics)
+    // implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.auth)
     implementation(libs.play.services.auth)
 

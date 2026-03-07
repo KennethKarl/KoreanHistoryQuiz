@@ -2,7 +2,8 @@ package com.historyquiz.app
 
 import android.app.Application
 import com.google.firebase.FirebaseApp
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+// TODO: 실제 Firebase 프로젝트 연결(google-services.json 교체) 후 주석 해제
+// import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.historyquiz.app.core.di.databaseModule
 import com.historyquiz.app.core.di.networkModule
 import com.historyquiz.app.core.di.repositoryModule
@@ -29,9 +30,8 @@ class HistoryQuizApplication : Application() {
 
     private fun initFirebase() {
         FirebaseApp.initializeApp(this)
-        // DEBUG 빌드에서 Crashlytics 비활성화 (google-services.json PLACEHOLDER 상태)
-        // 실제 Firebase 프로젝트 연결 후 이 줄 제거
-        FirebaseCrashlytics.getInstance().isCrashlyticsCollectionEnabled = !BuildConfig.DEBUG
+        // TODO: 실제 Firebase 프로젝트 연결(google-services.json 교체) 후 아래 줄 주석 해제
+        // FirebaseCrashlytics.getInstance().isCrashlyticsCollectionEnabled = !BuildConfig.DEBUG
     }
 
     private fun initKoin() {
