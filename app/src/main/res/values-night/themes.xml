@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 다크 모드 테마 — 라이트 테마와 같은 스타일 이름, 색상만 다름 -->
+    <style name="Theme.HistoryQuiz" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_dark_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_dark_on_primary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_dark_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_dark_on_primary_container</item>
+        <item name="colorSecondary">@color/md_theme_dark_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_dark_on_secondary</item>
+        <item name="colorBackground">@color/md_theme_dark_background</item>
+        <item name="colorSurface">@color/md_theme_dark_surface</item>
+        <item name="colorError">@color/md_theme_dark_error</item>
+        <item name="android:statusBarColor">@color/md_theme_dark_primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
