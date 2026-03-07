@@ -2,7 +2,7 @@ package com.historyquiz.app.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.historyquiz.app.domain.usecase.quiz.GetStreakUseCase
+import com.historyquiz.app.domain.usecase.result.GetStreakUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
