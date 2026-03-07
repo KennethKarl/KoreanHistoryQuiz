@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:background="@color/color_hanji"
     android:paddingHorizontal="32dp">
 
     <!-- 로고 -->
@@ -14,7 +14,6 @@
         android:layout_height="100dp"
         android:src="@drawable/ic_logo"
         android:contentDescription="@string/app_name"
-        app:tint="?attr/colorPrimary"
         app:layout_constraintBottom_toTopOf="@id/tv_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +29,8 @@
         android:layout_marginTop="20dp"
         android:text="@string/login_title"
         android:textAppearance="?attr/textAppearanceHeadlineMedium"
-        android:textColor="?attr/colorPrimary"
+        android:textColor="@color/color_dancheong_red"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tv_subtitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,13 +44,13 @@
         android:layout_marginTop="8dp"
         android:text="@string/login_subtitle"
         android:textAppearance="?attr/textAppearanceBodyMedium"
-        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textColor="@color/color_ink"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
-    <!-- Google 로그인 버튼 (TASK-003에서 로직 연결) -->
+    <!-- Google 로그인 버튼 (단청 주홍) -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_google_sign_in"
         android:layout_width="0dp"
@@ -58,9 +58,12 @@
         android:layout_marginBottom="48dp"
         android:text="@string/btn_google_sign_in"
         android:textSize="16sp"
+        android:backgroundTint="@color/color_dancheong_red"
+        android:textColor="#FFFFFF"
         app:icon="@drawable/ic_logo"
         app:iconSize="24dp"
         app:iconGravity="start"
+        app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -71,6 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        app:indicatorColor="@color/color_dancheong_red"
         app:layout_constraintBottom_toTopOf="@id/btn_google_sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

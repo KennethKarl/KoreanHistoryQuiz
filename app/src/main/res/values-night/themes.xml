@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 다크 모드 테마 — 라이트 테마와 같은 스타일 이름, 색상만 다름 -->
+    <!-- 다크 모드 테마 — 먹색(墨色) 기반 -->
     <style name="Theme.HistoryQuiz" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary : 밝은 주홍 -->
         <item name="colorPrimary">@color/md_theme_dark_primary</item>
         <item name="colorOnPrimary">@color/md_theme_dark_on_primary</item>
         <item name="colorPrimaryContainer">@color/md_theme_dark_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/md_theme_dark_on_primary_container</item>
+        <!-- Secondary : 황금 -->
         <item name="colorSecondary">@color/md_theme_dark_secondary</item>
         <item name="colorOnSecondary">@color/md_theme_dark_on_secondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_dark_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_dark_on_secondary_container</item>
+        <!-- Surface / Background : 먹색 -->
         <item name="android:colorBackground">@color/md_theme_dark_background</item>
         <item name="colorSurface">@color/md_theme_dark_surface</item>
+        <item name="colorOnSurface">@color/md_theme_dark_on_surface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_dark_surface_container</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_dark_on_surface_variant</item>
+        <!-- Error -->
         <item name="colorError">@color/md_theme_dark_error</item>
+        <!-- Status bar -->
         <item name="android:statusBarColor">@color/md_theme_dark_primary</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
