@@ -1,0 +1,111 @@
+# .gitlab-ci.yml 템플릿 — Android 단일 플랫폼
+# 위치: Android 프로젝트 루트에 .gitlab-ci.yml로 복사하여 사용
+# Runner 요구사항: Linux, Docker, JDK 17, Android SDK 34
+
+variables:
+  ANDROID_COMPILE_SDK: "34"
+  ANDROID_BUILD_TOOLS: "34.0.0"
+
+# -------------------------------------------------------------------
+# Stages
+# -------------------------------------------------------------------
+stages:
+  - validate
+  - build
+  - test
+  - staging
+  - production
+
+# -------------------------------------------------------------------
+# Validate
+# -------------------------------------------------------------------
+validate:lint:
+  stage: validate
+  tags: [android-runner]
+  script:
+    - ./gradlew lint
+  artifacts:
+    reports:
+      junit: app/build/reports/lint-results.xml
+    paths:
+      - app/build/reports/lint-results*.html
+    expire_in: 1 week
+
+# -------------------------------------------------------------------
+# Build
+# -------------------------------------------------------------------
+build:debug:
+  stage: build
+  tags: [android-runner]
+  script:
+    - ./gradlew assembleDebug
+  artifacts:
+    paths:
+      - app/build/outputs/apk/debug/
+    expire_in: 3 days
+
+build:release:
+  stage: build
+  tags: [android-runner]
+  only:
+    - release
+    - /^hotfix\/.*/
+  script:
+    - echo $KEYSTORE_FILE | base64 -d > app/keystore.jks
+    - ./gradlew assembleRelease
+      -Pandroid.injected.signing.store.file=$(pwd)/app/keystore.jks
+      -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD
+      -Pandroid.injected.signing.key.alias=$KEY_ALIAS
+      -Pandroid.injected.signing.key.password=$KEY_PASSWORD
+  artifacts:
+    paths:
+      - app/build/outputs/apk/release/
+      - app/build/outputs/bundle/release/
+    expire_in: 7 days
+
+# -------------------------------------------------------------------
+# Test
+# -------------------------------------------------------------------
+test:unit:
+  stage: test
+  tags: [android-runner]
+  script:
+    - ./gradlew test
+  artifacts:
+    reports:
+      junit: app/build/test-results/**/TEST-*.xml
+    paths:
+      - app/build/reports/tests/
+    expire_in: 1 week
+
+# -------------------------------------------------------------------
+# Staging Deploy (develop 브랜치)
+# -------------------------------------------------------------------
+deploy:staging:
+  stage: staging
+  tags: [android-runner]
+  environment:
+    name: staging
+  only:
+    - develop
+  script:
+    - ./gradlew assembleDebug
+    - cd fastlane && fastlane firebase_staging
+  dependencies:
+    - build:debug
+
+# -------------------------------------------------------------------
+# Production Deploy (release 브랜치)
+# -------------------------------------------------------------------
+deploy:production:
+  stage: production
+  tags: [android-runner]
+  environment:
+    name: production
+  only:
+    - release
+  when: manual  # 수동 승인 필수
+  script:
+    - cd fastlane && fastlane playstore_release
+  dependencies:
+    - build:release

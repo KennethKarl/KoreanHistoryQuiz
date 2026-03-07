@@ -1,0 +1,20 @@
+# Android
+.gradle/
+build/
+app/build/
+local.properties
+*.keystore
+!debug.keystore
+*.hprof
+
+# 환경변수
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+*.iml
+
+# Claude
+.claude/
