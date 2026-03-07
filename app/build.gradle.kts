@@ -28,17 +28,17 @@ android {
         create("dev") {
             applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
-            buildConfigField("String", "BASE_URL", "\"https://dev-api.historyquiz.com/v1\"")
+            buildConfigField("String", "BASE_URL", "\"https://dev-api.historyquiz.com/v1/\"")
             buildConfigField("String", "ENV", "\"dev\"")
         }
         create("staging") {
             applicationIdSuffix = ".staging"
             versionNameSuffix = "-staging"
-            buildConfigField("String", "BASE_URL", "\"https://staging-api.historyquiz.com/v1\"")
+            buildConfigField("String", "BASE_URL", "\"https://staging-api.historyquiz.com/v1/\"")
             buildConfigField("String", "ENV", "\"staging\"")
         }
         create("prod") {
-            buildConfigField("String", "BASE_URL", "\"https://api.historyquiz.com/v1\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.historyquiz.com/v1/\"")
             buildConfigField("String", "ENV", "\"prod\"")
         }
     }
