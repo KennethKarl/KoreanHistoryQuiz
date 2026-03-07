@@ -1,6 +1,7 @@
 package com.historyquiz.app.core.di
 
 import com.historyquiz.app.presentation.home.HomeViewModel
+import com.historyquiz.app.presentation.quiz.play.QuizPlayViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -8,4 +9,5 @@ import org.koin.dsl.module
 // TASK-008(SettingsViewModel), TASK-009(StatisticsViewModel) 구현 시 채운다.
 val viewModelModule = module {
     viewModel { HomeViewModel(getStreakUseCase = get()) }
+    viewModel { QuizPlayViewModel(getQuestionsUseCase = get()) }
 }
