@@ -7,10 +7,15 @@ import com.historyquiz.app.core.di.networkModule
 import com.historyquiz.app.core.di.repositoryModule
 import com.historyquiz.app.core.di.useCaseModule
 import com.historyquiz.app.core.di.viewModelModule
+import com.historyquiz.app.data.local.db.SeedDataHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
+import org.koin.java.KoinJavaComponent.get
 
 class HistoryQuizApplication : Application() {
 
@@ -18,6 +23,7 @@ class HistoryQuizApplication : Application() {
         super.onCreate()
         initFirebase()
         initKoin()
+        initDatabase()
     }
 
     private fun initFirebase() {
@@ -26,7 +32,6 @@ class HistoryQuizApplication : Application() {
 
     private fun initKoin() {
         startKoin {
-            // BuildConfig.DEBUG가 true일 때만 Koin 로그 출력
             androidLogger(if (BuildConfig.DEBUG) Level.DEBUG else Level.NONE)
             androidContext(this@HistoryQuizApplication)
             modules(
@@ -36,6 +41,13 @@ class HistoryQuizApplication : Application() {
                 useCaseModule,
                 viewModelModule,
             )
+        }
+    }
+
+    private fun initDatabase() {
+        GlobalScope.launch(Dispatchers.IO) {
+            val seedHelper = get<SeedDataHelper>(SeedDataHelper::class.java)
+            seedHelper.seedIfEmpty()
         }
     }
 }

@@ -3,6 +3,7 @@ package com.historyquiz.app.core.di
 import com.historyquiz.app.BuildConfig
 import com.historyquiz.app.core.network.AuthInterceptor
 import com.historyquiz.app.core.network.NetworkStatusChecker
+import com.historyquiz.app.data.remote.api.QuestionApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -22,7 +23,6 @@ val networkModule = module {
     // OkHttpClient
     single {
         val logging = HttpLoggingInterceptor().apply {
-            // DEBUG 빌드에서만 BODY 레벨 로깅 (민감 정보 노출 방지)
             level = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor.Level.BODY
             } else {
@@ -46,4 +46,7 @@ val networkModule = module {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+    // API Services
+    single<QuestionApiService> { get<Retrofit>().create(QuestionApiService::class.java) }
 }

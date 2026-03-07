@@ -106,7 +106,6 @@ dependencies {
     // ── DI (Koin) ────────────────────────────────────────────────────────
     implementation(libs.koin.core)
     implementation(libs.koin.android)
-    implementation(libs.koin.android.viewmodel)
 
     // ── Network ──────────────────────────────────────────────────────────
     implementation(libs.retrofit.core)
