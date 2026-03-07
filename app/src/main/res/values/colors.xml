@@ -1,38 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ── Light Theme (Material Design 3) ──────────────────────────────── -->
-    <!-- Primary: 역사 느낌의 진한 갈색 계열 -->
-    <color name="md_theme_primary">#7B4F2E</color>
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!--  한국사 퀴즈 디자인 팔레트 — 단청(丹靑) × 한지(韓紙) × 황금(黃金)   -->
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+
+    <!-- Primary : 단청 주홍 (Dancheong Vermillion) -->
+    <color name="md_theme_primary">#8C1C13</color>
     <color name="md_theme_on_primary">#FFFFFF</color>
-    <color name="md_theme_primary_container">#FFDCC2</color>
-    <color name="md_theme_on_primary_container">#2C1500</color>
-    <color name="md_theme_secondary">#735943</color>
+    <color name="md_theme_primary_container">#FFDAD6</color>
+    <color name="md_theme_on_primary_container">#410002</color>
+
+    <!-- Secondary : 황금 (Korean Gold) -->
+    <color name="md_theme_secondary">#8B6914</color>
     <color name="md_theme_on_secondary">#FFFFFF</color>
-    <color name="md_theme_tertiary_container">#F4DABD</color>
-    <color name="md_theme_background">#FFFBFF</color>
-    <color name="md_theme_surface">#FFFBFF</color>
-    <color name="md_theme_on_surface">#1F1B16</color>
-    <color name="md_theme_surface_container_highest">#EAE1D9</color>
+    <color name="md_theme_secondary_container">#FDDF9D</color>
+    <color name="md_theme_on_secondary_container">#2B1C00</color>
+
+    <!-- Tertiary : 쪽빛 (Korean Indigo) -->
+    <color name="md_theme_tertiary">#1B4A6B</color>
+    <color name="md_theme_on_tertiary">#FFFFFF</color>
+    <color name="md_theme_tertiary_container">#C9E6FF</color>
+    <color name="md_theme_on_tertiary_container">#001E30</color>
+
+    <!-- Surface / Background : 한지 (Hanji Paper) -->
+    <color name="md_theme_background">#FDF5EA</color>
+    <color name="md_theme_surface">#FDF5EA</color>
+    <color name="md_theme_on_surface">#1A1209</color>
+    <color name="md_theme_surface_container">#F0E4D0</color>
+    <color name="md_theme_surface_container_highest">#E3D4BC</color>
+    <color name="md_theme_on_surface_variant">#534340</color>
+    <color name="md_theme_outline">#857370</color>
+    <color name="md_theme_outline_variant">#D8C2BE</color>
+
+    <!-- Error -->
     <color name="md_theme_error">#BA1A1A</color>
 
     <!-- ── Dark Theme ─────────────────────────────────────────────────── -->
-    <color name="md_theme_dark_primary">#FFB87E</color>
-    <color name="md_theme_dark_on_primary">#452200</color>
-    <color name="md_theme_dark_primary_container">#623700</color>
-    <color name="md_theme_dark_on_primary_container">#FFDCC2</color>
-    <color name="md_theme_dark_secondary">#E2BFAB</color>
-    <color name="md_theme_dark_on_secondary">#412C1E</color>
-    <color name="md_theme_dark_background">#1F1B18</color>
-    <color name="md_theme_dark_surface">#1F1B18</color>
-    <color name="md_theme_dark_on_surface">#EAE1D9</color>
+    <color name="md_theme_dark_primary">#FFB4AB</color>
+    <color name="md_theme_dark_on_primary">#690004</color>
+    <color name="md_theme_dark_primary_container">#93000A</color>
+    <color name="md_theme_dark_on_primary_container">#FFDAD6</color>
+    <color name="md_theme_dark_secondary">#E0C36B</color>
+    <color name="md_theme_dark_on_secondary">#462E00</color>
+    <color name="md_theme_dark_secondary_container">#634700</color>
+    <color name="md_theme_dark_on_secondary_container">#FDDF9D</color>
+    <color name="md_theme_dark_background">#1A1209</color>
+    <color name="md_theme_dark_surface">#1A1209</color>
+    <color name="md_theme_dark_on_surface">#EDE0DE</color>
+    <color name="md_theme_dark_surface_container">#2A1F1A</color>
+    <color name="md_theme_dark_on_surface_variant">#D8C2BE</color>
     <color name="md_theme_dark_error">#FFB4AB</color>
 
-    <!-- ── 퀴즈 전용 색상 ────────────────────────────────────────────── -->
-    <color name="quiz_correct">#388E3C</color>      <!-- 정답: 초록 -->
-    <color name="quiz_wrong">#D32F2F</color>         <!-- 오답: 빨강 -->
-    <color name="quiz_option_default">#F5F0EB</color> <!-- 선택지 기본 배경 -->
-    <color name="quiz_option_selected">#FFDCC2</color><!-- 선택지 선택 배경 -->
-    <color name="streak_color">#FF6F00</color>        <!-- 스트릭: 불꽃 주황 -->
+    <!-- ── 퀴즈 전용 색상 ─────────────────────────────────────────────── -->
+    <color name="quiz_correct">#1A7A45</color>         <!-- 정답: 전통 녹색 -->
+    <color name="quiz_correct_bg">#D6F0E2</color>      <!-- 정답 배경     -->
+    <color name="quiz_wrong">#C13030</color>           <!-- 오답: 단청 빨강 -->
+    <color name="quiz_wrong_bg">#FFD7D7</color>        <!-- 오답 배경     -->
+    <color name="quiz_option_default">#F0E8DC</color>  <!-- 선택지 기본: 한지 -->
+    <color name="quiz_option_selected">#FFDAD6</color> <!-- 선택지 선택  -->
+    <color name="streak_color">#C9A227</color>         <!-- 스트릭: 황금  -->
 
-    <color name="seed">#7B4F2E</color>
+    <!-- ── 한국 전통 특수 색상 ──────────────────────────────────────── -->
+    <color name="color_gold">#C9A227</color>           <!-- 황금         -->
+    <color name="color_hanji">#FDF5EA</color>          <!-- 한지          -->
+    <color name="color_ink">#1A1209</color>            <!-- 먹색          -->
+    <color name="color_dancheong_red">#8C1C13</color>  <!-- 단청 주홍     -->
+    <color name="color_dancheong_dark">#6B1510</color> <!-- 단청 진주홍   -->
+    <color name="color_jokbit">#1B4A6B</color>         <!-- 쪽빛 인디고   -->
+    <color name="color_surface_card">#F0E4D0</color>   <!-- 카드 배경     -->
+
+    <color name="seed">#8C1C13</color>
 </resources>

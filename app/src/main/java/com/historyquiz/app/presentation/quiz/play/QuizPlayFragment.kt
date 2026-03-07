@@ -149,8 +149,8 @@ class QuizPlayFragment : Fragment() {
     }
 
     private fun resetOptionButtons() {
-        val defaultColor = ContextCompat.getColor(requireContext(), R.color.md_theme_surface_container_highest)
-        val defaultTextColor = ContextCompat.getColor(requireContext(), R.color.md_theme_on_surface)
+        val defaultColor = ContextCompat.getColor(requireContext(), R.color.quiz_option_default)
+        val defaultTextColor = ContextCompat.getColor(requireContext(), R.color.color_ink)
         
         optionButtons.forEach { btn ->
             btn.isEnabled = true

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
+    android:background="@color/color_hanji"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:text="홈"
             android:textAppearance="?attr/textAppearanceHeadlineMedium"
-            android:textColor="?attr/colorOnSurface"
+            android:textColor="@color/color_ink"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            app:cardBackgroundColor="?attr/colorSurfaceContainer"
+            app:cardBackgroundColor="@color/color_surface_card"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="오늘의 학습"
+                    android:textColor="@color/color_ink"
                     android:textAppearance="?attr/textAppearanceTitleMedium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -71,7 +72,7 @@
                             android:layout_height="wrap_content"
                             android:text="푼 문제"
                             android:textAppearance="?attr/textAppearanceBodyMedium"
-                            android:textColor="?attr/colorOnSurfaceVariant" />
+                            android:textColor="@color/color_ink" />
 
                         <TextView
                             android:id="@+id/tv_questions_solved_value"
@@ -79,6 +80,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="0문제"
+                            android:textColor="@color/color_dancheong_dark"
                             android:textAppearance="?attr/textAppearanceTitleLarge"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -95,7 +97,7 @@
                             android:layout_height="wrap_content"
                             android:text="정답률"
                             android:textAppearance="?attr/textAppearanceBodyMedium"
-                            android:textColor="?attr/colorOnSurfaceVariant" />
+                            android:textColor="@color/color_ink" />
 
                         <TextView
                             android:id="@+id/tv_accuracy_value"
@@ -103,6 +105,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="0%"
+                            android:textColor="@color/color_dancheong_dark"
                             android:textAppearance="?attr/textAppearanceTitleLarge"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -113,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
-                    android:background="?attr/colorOutlineVariant"
+                    android:background="@color/color_gold"
                     app:layout_constraintTop_toBottomOf="@id/container_stats" />
 
                 <LinearLayout
@@ -128,7 +131,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_streak"
-                        app:tint="?attr/colorPrimary" />
+                        app:tint="@color/color_gold" />
 
                     <TextView
                         android:id="@+id/tv_streak_days"
@@ -137,7 +140,7 @@
                         android:layout_marginStart="8dp"
                         android:text="0일 연속 학습 중!"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:textColor="?attr/colorPrimary"
+                        android:textColor="@color/color_dancheong_red"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -152,7 +155,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:visibility="gone"
-            app:cardBackgroundColor="?attr/colorSecondaryContainer"
+            app:cardBackgroundColor="@color/color_surface_card"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -171,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:text="최근 점수: 80점"
                     android:textAppearance="?attr/textAppearanceBodyLarge"
-                    android:textColor="?attr/colorOnSecondaryContainer"
+                    android:textColor="@color/color_ink"
                     android:textStyle="bold" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -184,6 +187,8 @@
             android:layout_marginTop="32dp"
             android:text="기본 퀴즈 시작"
             android:textSize="18sp"
+            android:backgroundTint="@color/color_jokbit"
+            android:textColor="@color/md_theme_on_primary"
             app:cornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -191,12 +196,13 @@
 
         <Button
             android:id="@+id/btn_start_advanced_quiz"
-            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginTop="16dp"
             android:text="심화 퀴즈 시작"
             android:textSize="18sp"
+            android:backgroundTint="@color/color_dancheong_red"
+            android:textColor="@color/md_theme_on_primary"
             app:cornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
