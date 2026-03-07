@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 공통 여백 -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_s">8dp</dimen>
+    <dimen name="spacing_m">16dp</dimen>
+    <dimen name="spacing_l">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="spacing_xxl">48dp</dimen>
+
+    <!-- 카드 -->
+    <dimen name="card_corner_radius">12dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+
+    <!-- 버튼 -->
+    <dimen name="btn_height">52dp</dimen>
+    <dimen name="btn_corner_radius">26dp</dimen>
+
+    <!-- 텍스트 크기 (초등학생 대상 — 크게) -->
+    <dimen name="text_size_headline">28sp</dimen>
+    <dimen name="text_size_title">22sp</dimen>
+    <dimen name="text_size_body">18sp</dimen>
+    <dimen name="text_size_label">14sp</dimen>
+
+    <!-- 퀴즈 화면 -->
+    <dimen name="quiz_option_height">60dp</dimen>
+    <dimen name="quiz_option_corner_radius">8dp</dimen>
+</resources>

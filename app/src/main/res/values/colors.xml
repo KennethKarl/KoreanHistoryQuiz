@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ── Light Theme (Material Design 3) ──────────────────────────────── -->
+    <!-- Primary: 역사 느낌의 진한 갈색 계열 -->
+    <color name="md_theme_primary">#7B4F2E</color>
+    <color name="md_theme_on_primary">#FFFFFF</color>
+    <color name="md_theme_primary_container">#FFDCC2</color>
+    <color name="md_theme_on_primary_container">#2C1500</color>
+    <color name="md_theme_secondary">#735943</color>
+    <color name="md_theme_on_secondary">#FFFFFF</color>
+    <color name="md_theme_tertiary_container">#F4DABD</color>
+    <color name="md_theme_background">#FFFBFF</color>
+    <color name="md_theme_surface">#FFFBFF</color>
+    <color name="md_theme_error">#BA1A1A</color>
+
+    <!-- ── Dark Theme ─────────────────────────────────────────────────── -->
+    <color name="md_theme_dark_primary">#FFB87E</color>
+    <color name="md_theme_dark_on_primary">#452200</color>
+    <color name="md_theme_dark_primary_container">#623700</color>
+    <color name="md_theme_dark_on_primary_container">#FFDCC2</color>
+    <color name="md_theme_dark_secondary">#E2BFAB</color>
+    <color name="md_theme_dark_on_secondary">#412C1E</color>
+    <color name="md_theme_dark_background">#1F1B18</color>
+    <color name="md_theme_dark_surface">#1F1B18</color>
+    <color name="md_theme_dark_error">#FFB4AB</color>
+
+    <!-- ── 퀴즈 전용 색상 ────────────────────────────────────────────── -->
+    <color name="quiz_correct">#388E3C</color>      <!-- 정답: 초록 -->
+    <color name="quiz_wrong">#D32F2F</color>         <!-- 오답: 빨강 -->
+    <color name="quiz_option_default">#F5F0EB</color> <!-- 선택지 기본 배경 -->
+    <color name="quiz_option_selected">#FFDCC2</color><!-- 선택지 선택 배경 -->
+    <color name="streak_color">#FF6F00</color>        <!-- 스트릭: 불꽃 주황 -->
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    네비게이션 그래프 — TASK-001 기반 (빈 그래프)
+    각 Fragment는 해당 TASK에서 추가된다:
+    - SplashFragment: TASK-002
+    - LoginFragment: TASK-003
+    - HomeFragment: TASK-005
+    - QuizPlayFragment: TASK-006
+-->
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <!--
+        TASK-002 이후 Fragment들이 여기에 추가됩니다.
+        현재는 컴파일을 위한 플레이스홀더입니다.
+    -->
+
+</navigation>
