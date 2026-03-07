@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 온보딩 1: 퀴즈 아이콘 (물음표 + 책) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <!-- 책 배경 -->
+    <path
+        android:fillColor="#E8D5B7"
+        android:pathData="M16,8 C13.8,8 12,9.8 12,12 L12,84 C12,86.2 13.8,88 16,88 L80,88 C82.2,88 84,86.2 84,84 L84,28 L64,8 Z" />
+
+    <!-- 접힌 모서리 -->
+    <path
+        android:fillColor="#C4A882"
+        android:pathData="M64,8 L84,28 L64,28 Z" />
+
+    <!-- 물음표 -->
+    <path
+        android:fillColor="#8B6914"
+        android:pathData="M48,30 C42,30 37,35 37,41 C37,44 38.5,46.5 40.5,48.5 C42.5,50.5 43,52 43,54 L53,54 C53,51 53.5,49 55.5,47 C57.5,45 59,43 59,41 C59,35 54,30 48,30 Z" />
+    <circle
+        android:fillColor="#8B6914"
+        android:cx="48"
+        android:cy="60"
+        android:r="4" />
+
+</vector>

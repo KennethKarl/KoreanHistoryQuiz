@@ -1,21 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    네비게이션 그래프 — TASK-001 기반 (빈 그래프)
-    각 Fragment는 해당 TASK에서 추가된다:
-    - SplashFragment: TASK-002
-    - LoginFragment: TASK-003
-    - HomeFragment: TASK-005
-    - QuizPlayFragment: TASK-006
--->
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashFragment">
 
-    <!--
-        TASK-002 이후 Fragment들이 여기에 추가됩니다.
-        현재는 컴파일을 위한 플레이스홀더입니다.
-    -->
+    <!-- ── Splash ──────────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.historyquiz.app.presentation.splash.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
+
+        <!-- 온보딩 미완료 → 온보딩 -->
+        <action
+            android:id="@+id/action_splash_to_onboarding"
+            app:destination="@id/onboardingFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+
+        <!-- 온보딩 완료 + 미로그인 → 로그인 -->
+        <action
+            android:id="@+id/action_splash_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+
+        <!-- 온보딩 완료 + 로그인 완료 → 홈 -->
+        <action
+            android:id="@+id/action_splash_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- ── Onboarding ───────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.historyquiz.app.presentation.onboarding.OnboardingFragment"
+        android:label="OnboardingFragment"
+        tools:layout="@layout/fragment_onboarding">
+
+        <!-- 온보딩 완료 → 로그인 (back stack 전체 클리어) -->
+        <action
+            android:id="@+id/action_onboarding_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- ── Login ────────────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.historyquiz.app.presentation.auth.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+
+        <!-- 로그인 성공 → 홈 (back stack 전체 클리어) -->
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- ── Home ─────────────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.historyquiz.app.presentation.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+
+        <!-- 홈 → 난이도 선택 (TASK-006에서 구현) -->
+        <action
+            android:id="@+id/action_home_to_difficulty_select"
+            app:destination="@id/difficultySelectFragment" />
+
+        <!-- 홈 → 통계 (TASK-009에서 구현) -->
+        <action
+            android:id="@+id/action_home_to_statistics"
+            app:destination="@id/statisticsFragment" />
+
+        <!-- 홈 → 내 정보 (TASK-008에서 구현) -->
+        <action
+            android:id="@+id/action_home_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <!-- ── Difficulty Select (TASK-006) ─────────────────────────── -->
+    <fragment
+        android:id="@+id/difficultySelectFragment"
+        android:name="com.historyquiz.app.presentation.quiz.select.DifficultySelectFragment"
+        android:label="DifficultySelectFragment">
+        <action
+            android:id="@+id/action_difficulty_to_quiz_play"
+            app:destination="@id/quizPlayFragment" />
+    </fragment>
+
+    <!-- ── Quiz Play (TASK-006) ──────────────────────────────────── -->
+    <fragment
+        android:id="@+id/quizPlayFragment"
+        android:name="com.historyquiz.app.presentation.quiz.play.QuizPlayFragment"
+        android:label="QuizPlayFragment">
+        <action
+            android:id="@+id/action_quiz_play_to_result"
+            app:destination="@id/quizResultFragment"
+            app:popUpTo="@id/difficultySelectFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- ── Quiz Result (TASK-007) ────────────────────────────────── -->
+    <fragment
+        android:id="@+id/quizResultFragment"
+        android:name="com.historyquiz.app.presentation.quiz.play.QuizResultFragment"
+        android:label="QuizResultFragment">
+        <action
+            android:id="@+id/action_result_to_difficulty_select"
+            app:destination="@id/difficultySelectFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_result_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- ── Statistics (TASK-009) ─────────────────────────────────── -->
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.historyquiz.app.presentation.statistics.StatisticsFragment"
+        android:label="StatisticsFragment" />
+
+    <!-- ── Settings (TASK-008) ───────────────────────────────────── -->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.historyquiz.app.presentation.settings.SettingsFragment"
+        android:label="SettingsFragment">
+        <!-- 로그아웃 → 로그인 (back stack 전체 클리어) -->
+        <action
+            android:id="@+id/action_settings_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>
