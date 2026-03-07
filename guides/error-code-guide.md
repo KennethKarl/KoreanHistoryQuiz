@@ -73,6 +73,7 @@ ui_0012_web    웹 페이지 렌더링 오류
 | `ui` | UI/화면 (UI) | 렌더링 오류, 화면 전환, 뷰 바인딩 |
 | `nav` | 내비게이션 (Navigation) | 딥링크, 라우팅, 화면 스택 |
 | `wv` | 웹뷰 (WebView) | WebView 로드, JS Bridge |
+| `quz` | 퀴즈 (Quiz) | 퀴즈 문제 로드, 캐시, 난이도 처리 — historyQuiz 전용 |
 
 ### 3-3. 서버 전용 카테고리
 
@@ -603,6 +604,17 @@ data class ErrorResponse(
 
 ---
 
+### 5-14. `quz` — 퀴즈 (historyQuiz Android 전용)
+
+| 코드 | 메시지 (한) | 메시지 (영) | 비고 |
+|------|-------------|-------------|------|
+| `quz_0001_and` | 문제 로드 실패 | Question load failed | 외부 API + 로컬 캐시 모두 실패 |
+| `quz_0002_and` | 캐시된 문제 없음 | No cached questions available | 오프라인 + 캐시 비어있을 때 |
+| `quz_0003_and` | 외부 문제 API 호출 실패 | External question API call failed | Retrofit 호출 오류 |
+| `quz_0600_and` | 유효하지 않은 난이도 설정 | Invalid difficulty setting | 난이도 값 범위 벗어남 |
+
+---
+
 ## 11. 개정 이력
 
 | 버전 | 날짜 | 변경 내용 |
@@ -611,3 +623,4 @@ data class ErrorResponse(
 | v1.1 | 2026-03-05 | 순번 3자리 → 4자리 변경, 미분류 대역 9000~9999로 조정 |
 | v1.2 | 2026-03-05 | 타사 오류 코드 체계 비교 섹션 추가, AWS식+prefix 조합 구현 가이드 추가 |
 | v1.3 | 2026-03-05 | 포맷 변경: `{prefix}_{category}_{num}` → `{category}_{num}_{suffix}` (크로스플랫폼 식별성 개선) |
+| v1.4 | 2026-03-07 | `quz` 카테고리 추가 (historyQuiz Android 퀴즈 전용, session-0-design) |
