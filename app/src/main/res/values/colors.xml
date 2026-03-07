@@ -11,6 +11,8 @@
     <color name="md_theme_tertiary_container">#F4DABD</color>
     <color name="md_theme_background">#FFFBFF</color>
     <color name="md_theme_surface">#FFFBFF</color>
+    <color name="md_theme_on_surface">#1F1B16</color>
+    <color name="md_theme_surface_container_highest">#EAE1D9</color>
     <color name="md_theme_error">#BA1A1A</color>
 
     <!-- ── Dark Theme ─────────────────────────────────────────────────── -->
@@ -22,6 +24,7 @@
     <color name="md_theme_dark_on_secondary">#412C1E</color>
     <color name="md_theme_dark_background">#1F1B18</color>
     <color name="md_theme_dark_surface">#1F1B18</color>
+    <color name="md_theme_dark_on_surface">#EAE1D9</color>
     <color name="md_theme_dark_error">#FFB4AB</color>
 
     <!-- ── 퀴즈 전용 색상 ────────────────────────────────────────────── -->
@@ -30,4 +33,6 @@
     <color name="quiz_option_default">#F5F0EB</color> <!-- 선택지 기본 배경 -->
     <color name="quiz_option_selected">#FFDCC2</color><!-- 선택지 선택 배경 -->
     <color name="streak_color">#FF6F00</color>        <!-- 스트릭: 불꽃 주황 -->
+
+    <color name="seed">#7B4F2E</color>
 </resources>

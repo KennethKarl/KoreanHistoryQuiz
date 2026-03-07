@@ -3,6 +3,7 @@ package com.historyquiz.app.core.di
 import androidx.room.Room
 import com.historyquiz.app.data.datastore.UserPreferencesDataStore
 import com.historyquiz.app.data.local.db.AppDatabase
+import com.historyquiz.app.data.local.db.SeedDataHelper
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -19,9 +20,12 @@ val databaseModule = module {
             .build()
     }
 
-    // DAOs (TASK-004/007에서 엔티티 추가 후 활성화)
-    // single { get<AppDatabase>().questionDao() }
-    // single { get<AppDatabase>().quizResultDao() }
+    // DAOs
+    single { get<AppDatabase>().questionDao() }
+    // single { get<AppDatabase>().quizResultDao() }   // TASK-007에서 활성화
+
+    // Seed Helper
+    single { SeedDataHelper(get()) }
 
     // DataStore
     single { UserPreferencesDataStore(androidContext()) }

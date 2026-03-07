@@ -8,7 +8,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 sealed interface QuizUiState {
@@ -69,7 +68,8 @@ class QuizPlayViewModel(
         if (currentState !is QuizUiState.Ready) return
 
         val question = questions[currentQuestionIndex]
-        val isCorrect = (selectedChoiceIndex == question.answer)
+        // selectedChoiceIndex는 1-based, answerIndex는 0-based
+        val isCorrect = (selectedChoiceIndex == question.answerIndex + 1)
 
         if (isCorrect) {
             correctAnswersCount++
@@ -96,7 +96,10 @@ class QuizPlayViewModel(
             emitReadyState()
         } else {
             // 모든 문제 완료
-            val score = (correctAnswersCount * 100) / questions.size
+            val score = if (questions.isNotEmpty()) {
+                (correctAnswersCount * 100) / questions.size
+            } else 0
+
             _uiState.value = QuizUiState.Finished(
                 totalScore = score,
                 correctCount = correctAnswersCount,

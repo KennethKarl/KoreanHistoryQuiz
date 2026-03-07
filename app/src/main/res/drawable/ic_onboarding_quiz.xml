@@ -20,10 +20,10 @@
     <path
         android:fillColor="#8B6914"
         android:pathData="M48,30 C42,30 37,35 37,41 C37,44 38.5,46.5 40.5,48.5 C42.5,50.5 43,52 43,54 L53,54 C53,51 53.5,49 55.5,47 C57.5,45 59,43 59,41 C59,35 54,30 48,30 Z" />
-    <circle
+
+    <!-- 점 -->
+    <path
         android:fillColor="#8B6914"
-        android:cx="48"
-        android:cy="60"
-        android:r="4" />
+        android:pathData="M48,56 A4,4 0 1,1 48,64 A4,4 0 1,1 48,56 Z" />
 
 </vector>

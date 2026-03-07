@@ -19,7 +19,7 @@ class QuestionRepositoryImpl(
     override suspend fun getQuestions(level: String, count: Int): List<Question> {
         val localQuestions = questionDao.getByLevel(level, count * 2).map { it.toDomain() }
 
-        if (!networkChecker.isConnected()) {
+        if (!networkChecker.isNetworkAvailable()) {
             if (localQuestions.isEmpty()) {
                 throw AppException(
                     AppError(

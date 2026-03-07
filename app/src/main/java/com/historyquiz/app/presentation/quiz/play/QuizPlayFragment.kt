@@ -117,7 +117,7 @@ class QuizPlayFragment : Fragment() {
         resetOptionButtons()
         
         // 4지 / 5지 선다 처리
-        question.choices.forEachIndexed { i, choice ->
+        question.options.forEachIndexed { i, choice ->
             if (i < optionButtons.size) {
                 optionButtons[i].visibility = View.VISIBLE
                 optionButtons[i].text = "${i + 1}. $choice"
@@ -125,7 +125,7 @@ class QuizPlayFragment : Fragment() {
         }
         
         // 4지선다인 경우 5번 버튼 숨김
-        if (question.choices.size < 5) {
+        if (question.options.size < 5) {
             binding.btnOption5.visibility = View.GONE
         }
     }
@@ -135,22 +135,22 @@ class QuizPlayFragment : Fragment() {
         optionButtons.forEach { it.isEnabled = false }
         
         val selectedIndex = state.selectedAnswer - 1
-        val correctIndex = state.question.answer - 1
+        val correctIndex = state.question.answerIndex
         
         // 정답 버튼을 초록색으로
         if (correctIndex in optionButtons.indices) {
-            setButtonColor(optionButtons[correctIndex], R.color.seed) // 임시로 seed color (초록 계열)
+            setButtonColor(optionButtons[correctIndex], R.color.quiz_correct)
         }
         
         // 오답을 선택했다면 해당 버튼을 빨간색으로
         if (!state.isCorrect && selectedIndex in optionButtons.indices) {
-            setButtonColor(optionButtons[selectedIndex], android.R.color.holo_red_light)
+            setButtonColor(optionButtons[selectedIndex], R.color.quiz_wrong)
         }
     }
 
     private fun resetOptionButtons() {
-        val defaultColor = ContextCompat.getColor(requireContext(), R.color.md_theme_surfaceContainerHighest)
-        val defaultTextColor = ContextCompat.getColor(requireContext(), R.color.md_theme_onSurface)
+        val defaultColor = ContextCompat.getColor(requireContext(), R.color.md_theme_surface_container_highest)
+        val defaultTextColor = ContextCompat.getColor(requireContext(), R.color.md_theme_on_surface)
         
         optionButtons.forEach { btn ->
             btn.isEnabled = true
@@ -161,7 +161,7 @@ class QuizPlayFragment : Fragment() {
 
     private fun setButtonColor(button: Button, colorResId: Int) {
         val color = ContextCompat.getColor(requireContext(), colorResId)
-        val onColor = ContextCompat.getColor(requireContext(), R.color.md_theme_onPrimary)
+        val onColor = ContextCompat.getColor(requireContext(), R.color.md_theme_on_primary)
         
         button.backgroundTintList = ColorStateList.valueOf(color)
         button.setTextColor(onColor)
@@ -169,7 +169,7 @@ class QuizPlayFragment : Fragment() {
 
     private fun moveToResult(score: Int, correct: Int, total: Int) {
         // TODO: TASK-007의 결과 화면으로 이동, 점수 데이터 전달
-        findNavController().navigate(R.id.action_quiz_play_to_result)
+        // findNavController().navigate(R.id.action_quiz_play_to_result)
     }
 
     override fun onDestroyView() {

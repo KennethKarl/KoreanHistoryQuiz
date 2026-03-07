@@ -28,6 +28,54 @@
           "other_platform_oauth_client": []
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:PLACEHOLDER:android:PLACEHOLDER_DEV",
+        "android_client_info": {
+          "package_name": "com.historyquiz.app.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "PLACEHOLDER.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "PLACEHOLDER_API_KEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:PLACEHOLDER:android:PLACEHOLDER_STAGING",
+        "android_client_info": {
+          "package_name": "com.historyquiz.app.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "PLACEHOLDER.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "PLACEHOLDER_API_KEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
     }
   ],
   "configuration_version": "1"
