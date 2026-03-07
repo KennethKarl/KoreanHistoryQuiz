@@ -2,7 +2,7 @@
   "_updated": "2026-03-07",
   "sessions": {
     "session-0-design": { "status": "done", "last_task": "초기 설계 완료 (TASK-001~009)", "last_updated": "2026-03-07", "note": "5개 설계 산출물 생성. 세션 1 개발 착수 가능." },
-    "session-1-dev":    { "status": "in_progress", "last_task": "TASK-001 완료 (프로젝트 기반 설정)", "last_updated": "2026-03-07", "note": "feature/TASK-001-project-base-setup 브랜치. 다음: TASK-002" },
+    "session-1-dev":    { "status": "in_progress", "last_task": "TASK-002 완료 (Splash, Onboarding, Login/Home 스텁)", "last_updated": "2026-03-07", "note": "feature/TASK-002-splash-onboarding-login 브랜치. 다음: TASK-003" },
     "session-2-review": { "status": "idle", "last_task": "", "last_updated": "", "note": "" },
     "session-3-test":   { "status": "idle", "last_task": "", "last_updated": "", "note": "" },
     "session-4-docs":   { "status": "idle", "last_task": "", "last_updated": "", "note": "" },
