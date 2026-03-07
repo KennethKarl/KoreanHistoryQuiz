@@ -15,6 +15,7 @@ data class QuestionEntity(
     @ColumnInfo(name = "answer_index") val answerIndex: Int,
     val level: String,
     val category: String,
+    val era: String = "미정",
     @ColumnInfo(name = "cached_at") val cachedAt: Long = System.currentTimeMillis(),
     val source: String = "local"
 ) {
@@ -28,6 +29,7 @@ data class QuestionEntity(
             answerIndex = answerIndex,
             level = level,
             category = category,
+            era = era,
             cachedAt = cachedAt,
             source = source
         )
@@ -42,6 +44,7 @@ data class QuestionEntity(
                 answerIndex = question.answerIndex,
                 level = question.level,
                 category = question.category,
+                era = question.era,
                 cachedAt = if (question.cachedAt > 0) question.cachedAt else System.currentTimeMillis(),
                 source = question.source
             )

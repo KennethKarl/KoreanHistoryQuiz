@@ -25,7 +25,7 @@ val databaseModule = module {
     single { get<AppDatabase>().quizResultDao() }
 
     // Seed Helper
-    single { SeedDataHelper(get()) }
+    single { SeedDataHelper(get(), androidContext()) }
 
     // DataStore
     single { UserPreferencesDataStore(androidContext()) }

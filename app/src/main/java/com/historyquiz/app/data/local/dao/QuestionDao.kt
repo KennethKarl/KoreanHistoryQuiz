@@ -12,6 +12,9 @@ interface QuestionDao {
     @Query("SELECT * FROM questions WHERE level = :level ORDER BY RANDOM() LIMIT :count")
     suspend fun getByLevel(level: String, count: Int): List<QuestionEntity>
 
+    @Query("SELECT * FROM questions WHERE level = :level AND era = :era ORDER BY RANDOM() LIMIT :count")
+    suspend fun getByLevelAndEra(level: String, era: String, count: Int): List<QuestionEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(questions: List<QuestionEntity>)
 

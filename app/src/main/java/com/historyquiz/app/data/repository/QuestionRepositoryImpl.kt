@@ -57,6 +57,10 @@ class QuestionRepositoryImpl(
         return questionDao.getByLevel(level, count).map { it.toDomain() }
     }
 
+    override suspend fun getLocalQuestionsByEra(level: String, era: String, count: Int): List<Question> {
+        return questionDao.getByLevelAndEra(level, era, count).map { it.toDomain() }
+    }
+
     override suspend fun saveQuestions(questions: List<Question>) {
         questionDao.insertAll(questions.map { QuestionEntity.fromDomain(it) })
     }
