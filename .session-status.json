@@ -2,7 +2,7 @@
   "_updated": "2026-03-07",
   "sessions": {
     "session-0-design": { "status": "done", "last_task": "초기 설계 완료 (TASK-001~009)", "last_updated": "2026-03-07", "note": "5개 설계 산출물 생성. 세션 1 개발 착수 가능." },
-    "session-1-dev":    { "status": "done", "last_task": "TASK-006 완료 (문제 데이터, 홈, 퀴즈 레이아웃)", "last_updated": "2026-03-07", "note": "feature/TASK-004-009-core-features 코어 기능 개발 완료. MR 리뷰 대기중." },
+    "session-1-dev":    { "status": "done", "last_task": "TASK-009 완료 (모든 코어 기능 구현 완료)", "last_updated": "2026-03-07", "note": "TASK-001~009 완료. 문제 데이터, Home/Quiz/Result/Settings/Stats 구현. develop에 머지완료." },
     "session-2-review": { "status": "idle", "last_task": "", "last_updated": "", "note": "" },
     "session-3-test":   { "status": "idle", "last_task": "", "last_updated": "", "note": "" },
     "session-4-docs":   { "status": "idle", "last_task": "", "last_updated": "", "note": "" },
