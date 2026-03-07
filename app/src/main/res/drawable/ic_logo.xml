@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 한국사 퀴즈 앱 로고: 책 모양 아이콘 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- 책 배경 -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M4,2 C3.45,2 3,2.45 3,3 L3,20 C3,20.55 3.45,21 4,21 L20,21 C20.55,21 21,20.55 21,20 L21,7 L16,2 Z" />
+
+    <!-- 책 페이지 접힌 부분 -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M16,2 L21,7 L16,7 Z" />
+
+    <!-- 줄 장식 (텍스트 표현) -->
+    <path
+        android:fillColor="#757575"
+        android:pathData="M7,10 L17,10 M7,13 L17,13 M7,16 L13,16"
+        android:strokeWidth="1.5"
+        android:strokeColor="#757575"
+        android:strokeLineCap="round" />
+
+</vector>

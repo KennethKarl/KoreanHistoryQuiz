@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 온보딩 3: 통계 아이콘 (막대 차트) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <!-- 차트 배경 -->
+    <path
+        android:fillColor="#F5ECD7"
+        android:pathData="M8,8 L8,88 L88,88 L88,8 Z" />
+
+    <!-- 축 -->
+    <path
+        android:strokeColor="#8B6914"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M16,80 L16,16 M16,80 L80,80" />
+
+    <!-- 막대 1 (낮음) -->
+    <path
+        android:fillColor="#C4A882"
+        android:pathData="M24,60 L36,60 L36,80 L24,80 Z" />
+
+    <!-- 막대 2 (중간) -->
+    <path
+        android:fillColor="#8B6914"
+        android:pathData="M42,40 L54,40 L54,80 L42,80 Z" />
+
+    <!-- 막대 3 (높음) -->
+    <path
+        android:fillColor="#5D4037"
+        android:pathData="M60,24 L72,24 L72,80 L60,80 Z" />
+
+    <!-- 상승 화살표 -->
+    <path
+        android:strokeColor="#4CAF50"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M20,72 L40,52 L56,60 L76,28" />
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M72,24 L80,32 L80,24 Z" />
+
+</vector>
