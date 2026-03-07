@@ -22,7 +22,7 @@ val databaseModule = module {
 
     // DAOs
     single { get<AppDatabase>().questionDao() }
-    // single { get<AppDatabase>().quizResultDao() }   // TASK-007에서 활성화
+    single { get<AppDatabase>().quizResultDao() }
 
     // Seed Helper
     single { SeedDataHelper(get()) }
