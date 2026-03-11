@@ -3,8 +3,9 @@ package com.historyquiz.app.presentation.quiz.play
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.historyquiz.app.domain.model.Question
+import com.historyquiz.app.domain.model.QuizResult
 import com.historyquiz.app.domain.usecase.quiz.GetQuestionsUseCase
-import kotlinx.coroutines.delay
+import com.historyquiz.app.domain.usecase.quiz.SubmitQuizUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -33,7 +34,8 @@ sealed interface QuizUiState {
 }
 
 class QuizPlayViewModel(
-    private val getQuestionsUseCase: GetQuestionsUseCase
+    private val getQuestionsUseCase: GetQuestionsUseCase,
+    private val submitQuizUseCase: SubmitQuizUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<QuizUiState>(QuizUiState.Loading)
@@ -42,15 +44,19 @@ class QuizPlayViewModel(
     private var questions: List<Question> = emptyList()
     private var currentQuestionIndex = 0
     private var correctAnswersCount = 0
+    private var startTime: Long = 0
+    private var quizLevel: String = "basic"
 
     // 기본 난이도("basic") 혹은 심화 난이도("advanced") 로드
     fun loadQuestions(level: String = "basic") {
+        quizLevel = level
         viewModelScope.launch {
             _uiState.value = QuizUiState.Loading
             try {
                 questions = getQuestionsUseCase(level)
                 currentQuestionIndex = 0
                 correctAnswersCount = 0
+                startTime = System.currentTimeMillis()
                 
                 if (questions.isEmpty()) {
                     _uiState.value = QuizUiState.Error("문제를 불러올 수 없습니다.")
@@ -82,12 +88,11 @@ class QuizPlayViewModel(
             selectedAnswer = selectedChoiceIndex,
             isCorrect = isCorrect
         )
+    }
 
-        // 1.5초 후 다음 문제로 넘어가거나 결과 화면으로 전환
-        viewModelScope.launch {
-            delay(1500)
-            moveToNextQuestion()
-        }
+    /** "다음" 버튼 클릭 시 Fragment에서 호출 */
+    fun moveToNext() {
+        moveToNextQuestion()
     }
 
     private fun moveToNextQuestion() {
@@ -95,16 +100,35 @@ class QuizPlayViewModel(
         if (currentQuestionIndex < questions.size) {
             emitReadyState()
         } else {
-            // 모든 문제 완료
-            val score = if (questions.isNotEmpty()) {
-                (correctAnswersCount * 100) / questions.size
-            } else 0
+            finishQuiz()
+        }
+    }
 
-            _uiState.value = QuizUiState.Finished(
-                totalScore = score,
-                correctCount = correctAnswersCount,
-                totalCount = questions.size
-            )
+    private fun finishQuiz() {
+        val durationSec = ((System.currentTimeMillis() - startTime) / 1000).toInt()
+        val score = if (questions.isNotEmpty()) {
+            (correctAnswersCount * 100) / questions.size
+        } else 0
+
+        viewModelScope.launch {
+            try {
+                val result = QuizResult(
+                    playedAt = System.currentTimeMillis(),
+                    level = quizLevel,
+                    totalCount = questions.size,
+                    correctCount = correctAnswersCount,
+                    durationSec = durationSec
+                )
+                submitQuizUseCase(result)
+                
+                _uiState.value = QuizUiState.Finished(
+                    totalScore = score,
+                    correctCount = correctAnswersCount,
+                    totalCount = questions.size
+                )
+            } catch (e: Exception) {
+                _uiState.value = QuizUiState.Error("결과 저장에 실패했습니다.")
+            }
         }
     }
 

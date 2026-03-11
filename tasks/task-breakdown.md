@@ -264,3 +264,160 @@ TASK-007 (결과) ──→ TASK-009 (통계) [P1]
 | **전체 합계** | | **10.5일** | |
 
 > 리뷰(세션2), 테스트(세션3), 성능(세션6), 문서화(세션4), 배포(세션7) 소요 별도.
+
+---
+
+## [신규] QUIZ DB 구축 태스크 (TASK-010~015)
+
+> 추가 세션: session-0-design (보완)
+> 추가일: 2026-03-08
+
+### 태스크 의존성
+
+```
+TASK-010 (PDF 파이프라인)
+  ├── TASK-011 (시대 구분 고도화) [P1]
+  ├── TASK-012 (이미지 크롭) [P0]
+  └── → TASK-013 (DB 생성·검증) [P0]
+              └── → TASK-014 (Android Room 통합) [P0]
+                          └── → TASK-015 (JSON 시드 제거·E2E 테스트) [P1]
+```
+
+---
+
+## TASK-010: PDF 파이프라인 스크립트 구축
+
+| 항목 | 내용 |
+|------|------|
+| 우선순위 | P0 |
+| 의존성 | 없음 (독립 Python 스크립트) |
+| 예상 소요 | 2.0일 |
+| 담당 | session-1-dev |
+| 입력 | `C:\Users\pc\Downloads\QUIZ\` (69개 PDF) |
+| 출력 | 문제 텍스트·선택지·정답 dict |
+
+**설명**: 문제지 PDF와 정답표 PDF를 파싱하여 구조화된 데이터를 추출한다.
+
+**수용 기준 (AC)**:
+- [ ] `scripts/build_quiz_db.py` 작성
+- [ ] 정답표 PDF(`*_정답표.pdf`)에서 문제번호→정답 매핑 추출
+- [ ] 문제지 PDF(`*_문제지.pdf`)에서 문제 텍스트·선택지 추출
+- [ ] `quiz/parse_real_pdfs.py`의 `ERA_KEYWORDS`, `determine_era()` 재사용
+- [ ] 57회~77회 기본+심화 전체 파싱 성공 (오류율 ≤ 1%)
+- [ ] 파싱 결과를 중간 JSON으로 덤프 (`scripts/output/parsed_questions.json`)
+
+---
+
+## TASK-011: 시대 구분 분류 고도화 [P1]
+
+| 항목 | 내용 |
+|------|------|
+| 우선순위 | P1 |
+| 의존성 | TASK-010 |
+| 예상 소요 | 0.5일 |
+| 담당 | session-1-dev |
+
+**설명**: 자동 분류 정확도를 높이고 미분류 문제를 수동으로 태깅한다.
+
+**수용 기준 (AC)**:
+- [ ] `ERA_KEYWORDS` 키워드 보완 (미분류 비율 ≤ 10% 목표)
+- [ ] `scripts/output/unclassified.json` 에 미분류 문제 목록 출력
+- [ ] 수동 태깅용 CSV(`scripts/output/manual_era_tags.csv`) 지원
+
+---
+
+## TASK-012: 문제 이미지 일괄 크롭
+
+| 항목 | 내용 |
+|------|------|
+| 우선순위 | P0 |
+| 의존성 | TASK-010 |
+| 예상 소요 | 1.0일 |
+| 담당 | session-1-dev |
+| 출력 | `app/src/main/assets/images/*.png` |
+
+**설명**: 문제지 PDF 각 페이지에서 개별 문제 영역을 PNG로 크롭한다.
+
+**수용 기준 (AC)**:
+- [ ] `scripts/crop_all.py` 작성 (`quiz/crop_questions.py` 래핑)
+- [ ] 2열 레이아웃 자동 감지 및 크롭
+- [ ] 파일명 규칙: `{회차}_{level}_{문제번호}.png` (예: `57_basic_1.png`)
+- [ ] 저장 위치: `app/src/main/assets/images/`
+- [ ] 이미지당 크기 ≤ 200KB
+
+---
+
+## TASK-013: SQLite DB 생성 및 검증
+
+| 항목 | 내용 |
+|------|------|
+| 우선순위 | P0 |
+| 의존성 | TASK-010, TASK-012 |
+| 예상 소요 | 0.5일 |
+| 담당 | session-1-dev |
+| 출력 | `app/src/main/assets/quiz.db` |
+
+**설명**: 파싱 데이터와 이미지 경로를 취합하여 SQLite DB를 생성하고 검증한다.
+
+**수용 기준 (AC)**:
+- [ ] `build_quiz_db.py`가 `quiz.db` 생성
+- [ ] DB 스키마: `questions` 테이블 (architecture.md §12-2 참조)
+- [ ] 레코드 수 검증: 회차별 50문제 × 기본+심화 총 건수 확인
+- [ ] 정답 샘플 검증: 임의 10문제 정답 정확성 수동 확인
+- [ ] DB 파일 크기 ≤ 50MB
+
+---
+
+## TASK-014: Android Room 통합
+
+| 항목 | 내용 |
+|------|------|
+| 우선순위 | P0 |
+| 의존성 | TASK-013 |
+| 예상 소요 | 1.0일 |
+| 담당 | session-1-dev |
+| 수정 파일 | `AppDatabase.kt`, `DatabaseModule.kt` |
+
+**설명**: 앱이 `quiz.db`를 assets에서 복사하여 Room DB로 사용하도록 변경한다.
+
+**수용 기준 (AC)**:
+- [ ] `AppDatabase.kt`에 `.createFromAsset("quiz.db")` 적용
+- [ ] DB 버전 +1, `fallbackToDestructiveMigration()` 설정 (개발 단계)
+- [ ] 기존 `QuestionEntity` 스키마와 `quiz.db` 스키마 호환 확인
+- [ ] 앱 콜드 스타트 시 DB 복사 시간 ≤ 3초
+- [ ] `QuizPlayViewModel.loadQuestions()` 정상 동작 확인
+
+---
+
+## TASK-015: 기존 JSON 시드 제거 및 E2E 테스트 [P1]
+
+| 항목 | 내용 |
+|------|------|
+| 우선순위 | P1 |
+| 의존성 | TASK-014 |
+| 예상 소요 | 0.5일 |
+| 담당 | session-1-dev |
+
+**설명**: JSON 기반 시드 코드를 제거하고 전체 퀴즈 플로우를 검증한다.
+
+**수용 기준 (AC)**:
+- [ ] `SeedDataHelper` 비활성화 (또는 삭제)
+- [ ] `korean_history_answers.json` 역할 제거 (이미 quiz.db로 대체)
+- [ ] 홈 → 퀴즈 플레이(기본) → 퀴즈 결과 E2E 동작 확인
+- [ ] 홈 → 퀴즈 플레이(심화) → 퀴즈 결과 E2E 동작 확인
+- [ ] 오프라인 상태에서 문제 로딩 정상 동작 확인
+
+---
+
+## 신규 태스크 일정 추가
+
+| TASK | 내용 | 소요(일) | 우선순위 |
+|------|------|----------|----------|
+| TASK-010 | PDF 파이프라인 | 2.0 | P0 |
+| TASK-012 | 이미지 크롭 | 1.0 | P0 |
+| TASK-013 | DB 생성·검증 | 0.5 | P0 |
+| TASK-014 | Android Room 통합 | 1.0 | P0 |
+| **P0 추가 합계** | | **4.5일** | |
+| TASK-011 | 시대 구분 고도화 | 0.5 | P1 |
+| TASK-015 | JSON 시드 제거·E2E | 0.5 | P1 |
+| **P1 추가 합계** | | **1.0일** | |

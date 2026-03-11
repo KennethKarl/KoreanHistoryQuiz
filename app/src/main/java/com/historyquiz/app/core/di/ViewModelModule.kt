@@ -8,8 +8,8 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { HomeViewModel(getStreakUseCase = get()) }
-    viewModel { QuizPlayViewModel(getQuestionsUseCase = get()) }
-    viewModel { SettingsViewModel() }
-    viewModel { StatisticsViewModel() }
+    viewModel { HomeViewModel(getStreakUseCase = get(), getStatisticsUseCase = get()) }
+    viewModel { QuizPlayViewModel(getQuestionsUseCase = get(), submitQuizUseCase = get()) }
+    viewModel { SettingsViewModel(userPreferencesDataStore = get()) }
+    viewModel { StatisticsViewModel(getStatisticsUseCase = get()) }
 }

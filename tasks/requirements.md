@@ -156,3 +156,58 @@
 - 기획서 원본: [Notion 링크 입력 예정]
 - 회의록: [Notion 링크 입력 예정]
 - 경쟁 앱: 한국사능력검정시험 앱 계열
+
+---
+
+## [신규] QUIZ DB 구축 요구사항
+
+> 추가 세션: session-0-design (보완)
+> 추가일: 2026-03-08
+> 관련 태스크: TASK-010~015
+
+### 개요
+
+`C:\Users\pc\Downloads\QUIZ`에 있는 한국사능력검정시험 PDF 파일들을
+파싱하여 앱 내장 SQLite DB(`quiz.db`)를 구축한다.
+빌드 시점에 Python 스크립트로 생성하고, Android/iOS 공통으로 사용 가능하다.
+
+### FR-DB-01: PDF 파싱
+
+- 57회~77회 한국사능력검정시험 문제지 PDF를 파싱한다
+- 기본(4지선다) / 심화(5지선다) 구분 처리
+- 문제 텍스트, 선택지(options), 정답(answer) 추출
+- PDF 파일명 규칙: `{회차}_{기본|심화}_문제지.pdf`, `{회차}_{기본|심화}_정답표.pdf`
+
+### FR-DB-02: 시대 구분 자동 분류
+
+- 문제 텍스트 키워드 기반으로 시대 구분 자동 태깅
+- 기존 `quiz/parse_real_pdfs.py`의 `ERA_KEYWORDS` 로직 재사용
+- 카테고리: 선사/고조선, 삼국, 통일신라/발해, 고려, 조선, 근대, 일제강점기, 현대, 미정
+
+### FR-DB-03: 문제 이미지 추출
+
+- 각 문제를 PNG 이미지로 크롭하여 저장
+- 2열 레이아웃 자동 감지 (기존 `quiz/crop_questions.py` 재사용)
+- 저장 경로: `app/src/main/assets/images/{회차}_{level}_{문제번호}.png`
+
+### FR-DB-04: SQLite DB 생성
+
+- 크로스플랫폼 SQLite DB 파일 생성 (`quiz.db`)
+- Android: Room의 `createFromAsset("quiz.db")`로 앱에 내장
+- (미래) iOS: SQLite3/FMDB 동일 파일 사용 가능
+
+### FR-DB-05: Android Room 통합
+
+- 기존 `QuestionEntity` 재사용 (era 필드 이미 존재)
+- `AppDatabase`에 `createFromAsset("quiz.db")` 적용
+- DB 버전 업 + Destructive Migration (개발 단계)
+- 기존 JSON 시드(`SeedDataHelper`) 비활성화
+
+### 비기능 요구사항 (DB)
+
+| 항목 | 기준 |
+|------|------|
+| 문제 수 | 57회~77회 × 기본+심화 × 50문제 = 최대 2,100건 |
+| 이미지 크기 | 문제당 PNG ≤ 200KB |
+| DB 파일 크기 | ≤ 50MB (이미지 별도 assets) |
+| 파싱 오류율 | ≤ 1% (미파싱 문제는 `content=''`로 저장) |

@@ -1,41 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 한국사 퀴즈 앱 테마 — 단청(丹靑) × 한지(韓紙) × 황금(黃金) -->
+    <!-- Base Theme -->
     <style name="Theme.HistoryQuiz" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Primary : 단청 주홍 -->
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- 1. 단청 테마 (Dancheong) - Default -->
+    <style name="Theme.HistoryQuiz.Dancheong" parent="Theme.HistoryQuiz">
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_on_primary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/md_theme_on_primary_container</item>
-        <!-- Secondary : 황금 -->
         <item name="colorSecondary">@color/md_theme_secondary</item>
         <item name="colorOnSecondary">@color/md_theme_on_secondary</item>
         <item name="colorSecondaryContainer">@color/md_theme_secondary_container</item>
         <item name="colorOnSecondaryContainer">@color/md_theme_on_secondary_container</item>
-        <!-- Tertiary : 쪽빛 -->
-        <item name="colorTertiary">@color/md_theme_tertiary</item>
-        <item name="colorOnTertiary">@color/md_theme_on_tertiary</item>
-        <item name="colorTertiaryContainer">@color/md_theme_tertiary_container</item>
-        <item name="colorOnTertiaryContainer">@color/md_theme_on_tertiary_container</item>
-        <!-- Surface / Background : 한지 -->
         <item name="android:colorBackground">@color/md_theme_background</item>
         <item name="colorSurface">@color/md_theme_surface</item>
         <item name="colorOnSurface">@color/md_theme_on_surface</item>
         <item name="colorSurfaceVariant">@color/md_theme_surface_container</item>
-        <item name="colorOnSurfaceVariant">@color/md_theme_on_surface_variant</item>
-        <!-- Outline -->
-        <item name="colorOutline">@color/md_theme_outline</item>
-        <!-- Error -->
-        <item name="colorError">@color/md_theme_error</item>
-        <!-- Status bar : 단청 주홍 -->
         <item name="android:statusBarColor">@color/color_dancheong_red</item>
-        <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <!-- 스플래시 테마 -->
+    <!-- 2. 고려청자 테마 (Celadon) -->
+    <style name="Theme.HistoryQuiz.Celadon" parent="Theme.HistoryQuiz">
+        <item name="colorPrimary">@color/celadon_primary</item>
+        <item name="colorOnPrimary">@color/celadon_on_primary</item>
+        <item name="colorPrimaryContainer">@color/celadon_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/celadon_on_surface</item>
+        <item name="colorSecondary">@color/celadon_accent</item>
+        <item name="colorOnSecondary">@color/celadon_on_primary</item>
+        <item name="android:colorBackground">@color/celadon_background</item>
+        <item name="colorSurface">@color/celadon_surface</item>
+        <item name="colorOnSurface">@color/celadon_on_surface</item>
+        <item name="colorSurfaceVariant">@color/celadon_primary_container</item>
+        <item name="android:statusBarColor">@color/celadon_primary</item>
+    </style>
+
+    <!-- 스플래시 테마 (기본은 단청 유지) -->
     <style name="Theme.HistoryQuiz.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/color_dancheong_red</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
-        <item name="postSplashScreenTheme">@style/Theme.HistoryQuiz</item>
+        <item name="postSplashScreenTheme">@style/Theme.HistoryQuiz.Dancheong</item>
     </style>
 </resources>

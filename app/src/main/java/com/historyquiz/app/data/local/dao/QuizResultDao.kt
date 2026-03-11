@@ -20,4 +20,20 @@ interface QuizResultDao {
 
     @Query("SELECT * FROM quiz_results WHERE played_at >= :startTime ORDER BY played_at DESC")
     suspend fun getResultsAfter(startTime: Long): List<QuizResultEntity>
+
+    @Query("""
+        SELECT q.era, COUNT(*) as count 
+        FROM wrong_answers w
+        JOIN questions q ON w.question_id = q.id
+        JOIN quiz_results r ON w.result_id = r.id
+        WHERE r.played_at >= :startTime
+        GROUP BY q.era
+        ORDER BY count DESC
+    """)
+    suspend fun getWrongErasAfter(startTime: Long): List<EraCount>
 }
+
+data class EraCount(
+    val era: String,
+    val count: Int
+)

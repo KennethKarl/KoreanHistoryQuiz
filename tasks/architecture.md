@@ -334,8 +334,106 @@ android {
 
 ---
 
-## 12. 개정 이력
+## 12. [신규] 오프라인 QUIZ DB 파이프라인
+
+> 추가 세션: session-0-design (보완)
+> 추가일: 2026-03-08
+> 관련 태스크: TASK-010~015
+
+### 12-1. 빌드 파이프라인 개요
+
+```
+C:\Users\pc\Downloads\QUIZ\  (PDF 원본)
+    ├── 57_기본_문제지.pdf
+    ├── 57_기본_정답표.pdf
+    ├── 57_심화_문제지.pdf
+    ├── 57_심화_정답표.pdf
+    └── ... (77회까지)
+         │
+         ▼
+  scripts/build_quiz_db.py   (메인 파이프라인)
+         │
+         ├─ step 1: 정답표 PDF 파싱 → 정답 dict {문제번호: 정답}
+         │           (pdfplumber 사용)
+         │
+         ├─ step 2: 문제지 PDF → 문제 텍스트/선택지 추출
+         │           (PyMuPDF/fitz 사용)
+         │           ERA_KEYWORDS 로직으로 시대 구분 자동 분류
+         │           (quiz/parse_real_pdfs.py 재사용)
+         │
+         ├─ step 3: 문제 이미지 크롭 → PNG 저장
+         │           (quiz/crop_questions.py 의 2열 크롭 로직 재사용)
+         │           저장: app/src/main/assets/images/{회차}_{level}_{문제번호}.png
+         │
+         └─ step 4: SQLite DB 생성
+                     저장: app/src/main/assets/quiz.db
+```
+
+### 12-2. DB 스키마 (quiz.db)
+
+```sql
+CREATE TABLE questions (
+    id           TEXT PRIMARY KEY,    -- "57_basic_1"
+    round        TEXT NOT NULL,       -- "57회"
+    round_num    INTEGER NOT NULL,    -- 57
+    level        TEXT NOT NULL,       -- "basic" | "advanced"
+    question_no  INTEGER NOT NULL,    -- 1~50
+    era          TEXT DEFAULT '미정', -- 시대 구분
+    content      TEXT DEFAULT '',     -- 문제 텍스트 (파싱 실패 시 공백)
+    image_path   TEXT,                -- "images/57_basic_1.png" (assets 상대경로)
+    answer       TEXT NOT NULL,       -- "3" (1-based)
+    options      TEXT DEFAULT '[]',   -- JSON 배열 ["①...","②..."]
+    created_at   INTEGER              -- Unix timestamp (스크립트 실행 시각)
+);
+
+CREATE INDEX idx_questions_level ON questions(level);
+CREATE INDEX idx_questions_era   ON questions(era);
+CREATE INDEX idx_questions_round ON questions(round_num);
+```
+
+### 12-3. 시대 구분 카테고리
+
+| 카테고리 값 | 설명 |
+|------------|------|
+| `선사/고조선` | 구석기, 신석기, 청동기, 고조선 |
+| `삼국` | 고구려, 백제, 신라, 가야 |
+| `통일신라/발해` | 통일 신라, 발해 |
+| `고려` | 고려 시대 |
+| `조선` | 조선 시대 |
+| `근대` | 개화기, 동학, 갑오개혁 |
+| `일제강점기` | 일제강점기, 독립운동 |
+| `현대` | 8·15 광복 이후 |
+| `미정` | 분류 불가 |
+
+### 12-4. Android Room 통합 변경
+
+```
+변경 전:
+AppDatabase → JSON(korean_history_answers.json) → SeedDataHelper → questions 테이블
+
+변경 후:
+AppDatabase.createFromAsset("quiz.db") → questions 테이블 (pre-populated)
+
+변경 사항:
+- AppDatabase.kt: createFromAsset("quiz.db") 옵션 추가
+- DB 버전: 현재 버전 +1 (Destructive Migration 허용, 개발 단계)
+- SeedDataHelper: 비활성화 (quiz.db가 없을 때만 fallback으로 유지)
+```
+
+### 12-5. 사용 라이브러리 (Python 파이프라인)
+
+| 라이브러리 | 버전 | 용도 |
+|-----------|------|------|
+| PyMuPDF (fitz) | ≥1.23 | PDF 페이지 렌더링·텍스트 추출 |
+| pdfplumber | ≥0.11 | 정답표 PDF 텍스트 파싱 |
+| Pillow | ≥10.0 | PNG 이미지 처리 |
+| sqlite3 | 내장 | SQLite DB 생성 |
+
+---
+
+## 13. 개정 이력
 
 | 버전 | 날짜 | 변경 내용 |
 |------|------|-----------|
 | v1.0 | 2026-03-07 | 최초 작성 (session-0-design) |
+| v1.1 | 2026-03-08 | §12 QUIZ DB 파이프라인 추가 (session-0-design 보완) |

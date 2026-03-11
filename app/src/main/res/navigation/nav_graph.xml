@@ -72,10 +72,10 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
 
-        <!-- 홈 → 난이도 선택 (TASK-006에서 구현) -->
+        <!-- 홈 → 퀴즈 플레이 (level 인자 포함) -->
         <action
-            android:id="@+id/action_home_to_difficulty_select"
-            app:destination="@id/difficultySelectFragment" />
+            android:id="@+id/action_home_to_quiz_play"
+            app:destination="@id/quizPlayFragment" />
 
         <!-- 홈 → 통계 (TASK-009에서 구현) -->
         <action
@@ -88,38 +88,44 @@
             app:destination="@id/settingsFragment" />
     </fragment>
 
-    <!-- ── Difficulty Select (TASK-006) ─────────────────────────── -->
-    <fragment
-        android:id="@+id/difficultySelectFragment"
-        android:name="com.historyquiz.app.presentation.quiz.select.DifficultySelectFragment"
-        android:label="DifficultySelectFragment">
-        <action
-            android:id="@+id/action_difficulty_to_quiz_play"
-            app:destination="@id/quizPlayFragment" />
-    </fragment>
-
-    <!-- ── Quiz Play (TASK-006) ──────────────────────────────────── -->
+    <!-- ── Quiz Play ─────────────────────────────────────────────── -->
     <fragment
         android:id="@+id/quizPlayFragment"
         android:name="com.historyquiz.app.presentation.quiz.play.QuizPlayFragment"
         android:label="QuizPlayFragment">
+
+        <!-- level: "basic" | "advanced" -->
+        <argument
+            android:name="level"
+            android:defaultValue="basic"
+            app:argType="string" />
+
         <action
             android:id="@+id/action_quiz_play_to_result"
             app:destination="@id/quizResultFragment"
-            app:popUpTo="@id/difficultySelectFragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
-    <!-- ── Quiz Result (TASK-007) ────────────────────────────────── -->
+    <!-- ── Quiz Result ───────────────────────────────────────────── -->
     <fragment
         android:id="@+id/quizResultFragment"
         android:name="com.historyquiz.app.presentation.quiz.play.QuizResultFragment"
         android:label="QuizResultFragment">
+
+        <!-- 이전 퀴즈의 난이도를 전달받아 다시 풀기에 사용 -->
+        <argument
+            android:name="level"
+            android:defaultValue="basic"
+            app:argType="string" />
+
+        <!-- 다시 풀기 → 동일 난이도로 퀴즈 재시작 -->
         <action
-            android:id="@+id/action_result_to_difficulty_select"
-            app:destination="@id/difficultySelectFragment"
+            android:id="@+id/action_result_to_quiz_play"
+            app:destination="@id/quizPlayFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
+
         <action
             android:id="@+id/action_result_to_home"
             app:destination="@id/homeFragment"

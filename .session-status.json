@@ -1,10 +1,10 @@
 {
-  "_updated": "2026-03-07",
+  "_updated": "2026-03-08",
   "sessions": {
-    "session-0-design": { "status": "done", "last_task": "초기 설계 완료 (TASK-001~009)", "last_updated": "2026-03-07", "note": "5개 설계 산출물 생성. 세션 1 개발 착수 가능." },
-    "session-1-dev":    { "status": "done", "last_task": "TASK-009 완료 (모든 코어 기능 구현 완료)", "last_updated": "2026-03-07", "note": "TASK-001~009 완료. 문제 데이터, Home/Quiz/Result/Settings/Stats 구현. develop에 머지완료." },
-    "session-2-review": { "status": "idle", "last_task": "", "last_updated": "", "note": "" },
-    "session-3-test":   { "status": "idle", "last_task": "", "last_updated": "", "note": "" },
+    "session-0-design": { "status": "done", "last_task": "QUIZ DB 구축 설계 추가 완료 (TASK-010~015)", "last_updated": "2026-03-08", "note": "초기 설계(TASK-001~009) + QUIZ DB 파이프라인 설계(TASK-010~015) 완료. requirements/architecture/task-breakdown/directory-structure 업데이트." },
+    "session-1-dev":    { "status": "done", "last_task": "TASK-015 완료 (QUIZ DB 파이프라인 전체 완료)", "last_updated": "2026-03-08", "note": "TASK-010~015 완료. build_quiz_db.py(QuestionEntity 호환 스키마), crop_all.py, AppDatabase v4+createFromAsset, SeedDataHelper 비활성화, QuizPlayFragment 이미지로딩 수정. quiz.db 1500레코드." },
+    "session-2-review": { "status": "done", "last_task": "crop_all.py EasyOCR 재작성 + 전체 이미지 생성 완료", "last_updated": "2026-03-08", "note": "crop_questions.py EasyOCR 문제번호 감지 방식으로 재작성. 31개 PDF 처리 → 1647개 이미지 생성. 평균 92-100% 검출률. crop_all.py Unicode 에러 수정 + already_done 38-55 기준." },
+    "session-3-test":   { "status": "done", "last_task": "crop_questions.py Windows 예약명 필터 추가 + images/ nul 파일 우회 삭제 완료", "last_updated": "2026-03-08", "note": "images/ 디렉토리 재구성(1646 PNG, nul 제거). crop_questions.py cv2.imwrite 직전 _WIN_RESERVED 체크 추가(재발방지). images_old/ 디렉토리 잔존(nul 포함, Windows 제약으로 삭제불가). Android Studio Clean→Rebuild→Run 필요." },
     "session-4-docs":   { "status": "idle", "last_task": "", "last_updated": "", "note": "" },
     "session-5-notion": { "status": "idle", "last_task": "", "last_updated": "", "note": "" },
     "session-6-perf":   { "status": "idle", "last_task": "", "last_updated": "", "note": "" },

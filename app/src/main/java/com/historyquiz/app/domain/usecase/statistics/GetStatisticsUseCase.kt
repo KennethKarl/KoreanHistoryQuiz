@@ -16,15 +16,14 @@ data class Statistics(
     val daily: PeriodStats,
     val weekly: PeriodStats,
     val monthly: PeriodStats,
-    val levelDistribution: Map<String, Int> // "basic" to count, "advanced" to count
+    val levelDistribution: Map<String, Int>,
+    val weakestEra: String?
 )
 
 class GetStatisticsUseCase(
     private val repository: QuizResultRepository
 ) {
     suspend operator fun invoke(): Statistics {
-        val now = System.currentTimeMillis()
-        
         // 오늘 00:00:00
         val dayStart = getStartOfToday()
         // 이번 주 월요일 00:00:00
@@ -36,13 +35,17 @@ class GetStatisticsUseCase(
         
         val dailyResults = allResults.filter { it.playedAt >= dayStart }
         val weeklyResults = allResults.filter { it.playedAt >= weekStart }
-        val monthlyResults = allResults // 이미 monthStart 이후임
+        val monthlyResults = allResults
+
+        val wrongEras = repository.getWrongErasAfter(monthStart)
+        val weakest = wrongEras.firstOrNull()?.era
 
         return Statistics(
             daily = calculateStats("오늘", dailyResults),
             weekly = calculateStats("이번 주", weeklyResults),
             monthly = calculateStats("이번 달", monthlyResults),
-            levelDistribution = allResults.groupingBy { it.level }.eachCount()
+            levelDistribution = allResults.groupingBy { it.level }.eachCount(),
+            weakestEra = weakest
         )
     }
 

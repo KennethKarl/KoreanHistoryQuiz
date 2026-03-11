@@ -3,6 +3,7 @@ package com.historyquiz.app.presentation.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.historyquiz.app.domain.usecase.result.GetStreakUseCase
+import com.historyquiz.app.domain.usecase.statistics.GetStatisticsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,7 +19,8 @@ data class HomeUiState(
 )
 
 class HomeViewModel(
-    private val getStreakUseCase: GetStreakUseCase
+    private val getStreakUseCase: GetStreakUseCase,
+    private val getStatisticsUseCase: GetStatisticsUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
@@ -28,16 +30,18 @@ class HomeViewModel(
         loadHomeData()
     }
 
-    private fun loadHomeData() {
+    fun loadHomeData() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             
-            // TODO: TASK-007 완성 후 실제 데이터 fetch
             val streak = getStreakUseCase()
+            val stats = getStatisticsUseCase()
 
             _uiState.update {
                 it.copy(
                     streakDays = streak,
+                    questionsSolvedToday = stats.daily.totalQuestions,
+                    accuracyToday = stats.daily.accuracy,
                     isLoading = false
                 )
             }

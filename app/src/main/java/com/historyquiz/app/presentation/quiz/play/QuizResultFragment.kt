@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.historyquiz.app.R
@@ -30,15 +31,26 @@ class QuizResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
-        // TASK-007 진행 시 파라미터 전달받아 뷰 업데이트 구현
+        // 이전 화면(QuizPlay)에서 전달받은 인수
+        val level        = arguments?.getString("level") ?: "basic"
+        val totalScore   = arguments?.getInt("totalScore",   0) ?: 0
+        val correctCount = arguments?.getInt("correctCount", 0) ?: 0
+        val totalCount   = arguments?.getInt("totalCount",   0) ?: 0
+
+        // 점수 및 정답 수 표시
+        binding.tvScoreValue.text   = "${totalScore}점"
+        binding.tvCorrectCount.text = "정답 ${correctCount} / 전체 ${totalCount}"
 
         binding.btnGoHome.setOnClickListener {
             findNavController().navigate(R.id.action_result_to_home)
         }
-        
+
         binding.btnRetry.setOnClickListener {
-            // 동일 난이도로 다시 시작
-            findNavController().navigate(R.id.action_result_to_difficulty_select)
+            // 동일 난이도로 퀴즈 재시작
+            findNavController().navigate(
+                R.id.action_result_to_quiz_play,
+                bundleOf("level" to level)
+            )
         }
     }
 

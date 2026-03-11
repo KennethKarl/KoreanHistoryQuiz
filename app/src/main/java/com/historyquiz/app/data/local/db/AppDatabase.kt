@@ -10,7 +10,7 @@ import com.historyquiz.app.data.local.entity.WrongAnswerEntity
 
 @Database(
     entities = [QuestionEntity::class, QuizResultEntity::class, WrongAnswerEntity::class],
-    version = 3,
+    version = 4,  // TASK-014: createFromAsset("quiz.db") 통합 버전업
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

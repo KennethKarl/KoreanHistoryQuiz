@@ -32,10 +32,7 @@
     <color name="md_theme_outline">#857370</color>
     <color name="md_theme_outline_variant">#D8C2BE</color>
 
-    <!-- Error -->
-    <color name="md_theme_error">#BA1A1A</color>
-
-    <!-- ── Dark Theme ─────────────────────────────────────────────────── -->
+    <!-- ── Dark Theme Colors ─────────────────────────────────────────── -->
     <color name="md_theme_dark_primary">#FFB4AB</color>
     <color name="md_theme_dark_on_primary">#690004</color>
     <color name="md_theme_dark_primary_container">#93000A</color>
@@ -50,6 +47,20 @@
     <color name="md_theme_dark_surface_container">#2A1F1A</color>
     <color name="md_theme_dark_on_surface_variant">#D8C2BE</color>
     <color name="md_theme_dark_error">#FFB4AB</color>
+
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <!--  고려청자(高麗靑磁) 테마 컬러                                      -->
+    <!-- ══════════════════════════════════════════════════════════════════ -->
+    <color name="celadon_primary">#789E9E</color>      <!-- 청자 비색 (Celadon Green) -->
+    <color name="celadon_on_primary">#FFFFFF</color>
+    <color name="celadon_primary_container">#D1E7E7</color>
+    <color name="celadon_background">#F2F7F7</color>   <!-- 맑은 청자 연색 -->
+    <color name="celadon_surface">#F2F7F7</color>
+    <color name="celadon_on_surface">#2D3D3D</color>
+    <color name="celadon_accent">#B59B7D</color>       <!-- 학/구름 무늬 (Beige/Sand) -->
+
+    <!-- Error -->
+    <color name="md_theme_error">#BA1A1A</color>
 
     <!-- ── 퀴즈 전용 색상 ─────────────────────────────────────────────── -->
     <color name="quiz_correct">#1A7A45</color>         <!-- 정답: 전통 녹색 -->

@@ -65,13 +65,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="80점"
                 android:textAppearance="?attr/textAppearanceDisplayMedium"
                 android:textColor="@color/color_gold"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_score_label" />
+                app:layout_constraintTop_toBottomOf="@id/tv_score_label"
+                tools:text="70점" />
 
             <TextView
                 android:id="@+id/tv_correct_count"
@@ -81,7 +81,7 @@
                 android:background="@drawable/bg_rounded_primary_container"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
-                android:text="정답 8 / 전체 10"
+                tools:text="정답 7 / 전체 10"
                 android:textAppearance="?attr/textAppearanceLabelLarge"
                 android:textColor="@color/color_dancheong_dark"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.historyquiz.app.R
 import com.historyquiz.app.databinding.FragmentSettingsBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -39,12 +38,14 @@ class SettingsFragment : Fragment() {
     private fun setupViews() {
         binding.rgTheme.setOnCheckedChangeListener { _, checkedId ->
             val theme = when (checkedId) {
-                R.id.rb_theme_celadon -> "celadon"
+                binding.rbThemeCeladon.id -> "celadon"
                 else -> "dancheong"
             }
-            viewModel.updateTheme(theme)
-            // 테마 적용을 위해 액티비티 재시작
-            activity?.recreate()
+            if (theme != viewModel.uiState.value.appTheme) {
+                viewModel.updateTheme(theme)
+                // 테마 적용을 위해 액티비티 재시작
+                activity?.recreate()
+            }
         }
 
         binding.btnLogout.setOnClickListener {
@@ -57,9 +58,9 @@ class SettingsFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collectLatest { state ->
                     if (state.appTheme == "celadon") {
-                        binding.rb_theme_celadon.isChecked = true
+                        binding.rbThemeCeladon.isChecked = true
                     } else {
-                        binding.rb_theme_dancheong.isChecked = true
+                        binding.rbThemeDancheong.isChecked = true
                     }
                 }
             }

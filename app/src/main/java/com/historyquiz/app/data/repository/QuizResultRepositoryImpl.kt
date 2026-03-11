@@ -1,5 +1,6 @@
 package com.historyquiz.app.data.repository
 
+import com.historyquiz.app.data.local.dao.EraCount
 import com.historyquiz.app.data.local.dao.QuizResultDao
 import com.historyquiz.app.data.local.entity.QuizResultEntity
 import com.historyquiz.app.domain.model.QuizResult
@@ -20,5 +21,9 @@ class QuizResultRepositoryImpl(
 
     override suspend fun getResultsAfter(startTime: Long): List<QuizResult> {
         return quizResultDao.getResultsAfter(startTime).map { it.toDomain() }
+    }
+
+    override suspend fun getWrongErasAfter(startTime: Long): List<EraCount> {
+        return quizResultDao.getWrongErasAfter(startTime)
     }
 }

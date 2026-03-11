@@ -1,29 +1,55 @@
 package com.historyquiz.app.presentation.settings
 
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import androidx.lifecycle.viewModelScope
+import com.historyquiz.app.data.datastore.UserPreferencesDataStore
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 data class SettingsUiState(
     val notificationEnabled: Boolean = true,
-    val weeklyGoal: Int = 20
+    val weeklyGoal: Int = 20,
+    val appTheme: String = "dancheong"
 )
 
-class SettingsViewModel : ViewModel() {
+class SettingsViewModel(
+    private val userPreferencesDataStore: UserPreferencesDataStore
+) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(SettingsUiState())
-    val uiState: StateFlow<SettingsUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<SettingsUiState> = combine(
+        userPreferencesDataStore.notificationEnabled,
+        userPreferencesDataStore.weeklyGoal,
+        userPreferencesDataStore.appTheme
+    ) { notification, goal, theme ->
+        SettingsUiState(notification, goal, theme)
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = SettingsUiState()
+    )
 
     fun logout() {
         // TODO: Firebase Auth signOut 연결
     }
 
     fun toggleNotification(enabled: Boolean) {
-        _uiState.value = _uiState.value.copy(notificationEnabled = enabled)
+        viewModelScope.launch {
+            userPreferencesDataStore.setNotificationEnabled(enabled)
+        }
     }
 
     fun updateWeeklyGoal(goal: Int) {
-        _uiState.value = _uiState.value.copy(weeklyGoal = goal)
+        viewModelScope.launch {
+            userPreferencesDataStore.setWeeklyGoal(goal)
+        }
+    }
+
+    fun updateTheme(theme: String) {
+        viewModelScope.launch {
+            userPreferencesDataStore.setAppTheme(theme)
+        }
     }
 }

@@ -23,6 +23,7 @@ class UserPreferencesDataStore(private val context: Context) {
         val LAST_SIGNED_IN_EMAIL = stringPreferencesKey("last_signed_in_email")
         val NOTIFICATION_ENABLED = booleanPreferencesKey("notification_enabled")
         val WEEKLY_GOAL = intPreferencesKey("weekly_goal")
+        val APP_THEME = stringPreferencesKey("app_theme")
     }
 
     // ── Reads ──────────────────────────────────────────────────────────────
@@ -38,6 +39,9 @@ class UserPreferencesDataStore(private val context: Context) {
 
     val weeklyGoal: Flow<Int> = context.dataStore.data
         .map { it[Keys.WEEKLY_GOAL] ?: 20 }
+
+    val appTheme: Flow<String> = context.dataStore.data
+        .map { it[Keys.APP_THEME] ?: "dancheong" }
 
     // ── Writes ─────────────────────────────────────────────────────────────
 
@@ -58,6 +62,10 @@ class UserPreferencesDataStore(private val context: Context) {
 
     suspend fun setWeeklyGoal(goal: Int) {
         context.dataStore.edit { it[Keys.WEEKLY_GOAL] = goal }
+    }
+
+    suspend fun setAppTheme(theme: String) {
+        context.dataStore.edit { it[Keys.APP_THEME] = theme }
     }
 
     suspend fun clearAll() {

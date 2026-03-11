@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_hanji"
+    android:background="?android:colorBackground"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,15 +12,28 @@
         android:layout_height="wrap_content"
         android:padding="24dp">
 
+        <ImageButton
+            android:id="@+id/btn_menu"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="메뉴"
+            android:src="@android:drawable/ic_menu_sort_by_size"
+            app:layout_constraintBottom_toBottomOf="@id/tv_home_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_home_title"
+            app:tint="?attr/colorOnSurface" />
+
         <TextView
             android:id="@+id/tv_home_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
             android:text="홈"
             android:textAppearance="?attr/textAppearanceHeadlineMedium"
-            android:textColor="@color/color_ink"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_menu"
             app:layout_constraintTop_toTopOf="parent" />
 
         <!-- 오늘 학습 요약 카드 -->
@@ -30,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            app:cardBackgroundColor="@color/color_surface_card"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="오늘의 학습"
-                    android:textColor="@color/color_ink"
+                    android:textColor="?attr/colorOnSurface"
                     android:textAppearance="?attr/textAppearanceTitleMedium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -72,7 +85,7 @@
                             android:layout_height="wrap_content"
                             android:text="푼 문제"
                             android:textAppearance="?attr/textAppearanceBodyMedium"
-                            android:textColor="@color/color_ink" />
+                            android:textColor="?attr/colorOnSurface" />
 
                         <TextView
                             android:id="@+id/tv_questions_solved_value"
@@ -80,7 +93,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="0문제"
-                            android:textColor="@color/color_dancheong_dark"
+                            android:textColor="?attr/colorPrimary"
                             android:textAppearance="?attr/textAppearanceTitleLarge"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -97,7 +110,7 @@
                             android:layout_height="wrap_content"
                             android:text="정답률"
                             android:textAppearance="?attr/textAppearanceBodyMedium"
-                            android:textColor="@color/color_ink" />
+                            android:textColor="?attr/colorOnSurface" />
 
                         <TextView
                             android:id="@+id/tv_accuracy_value"
@@ -105,7 +118,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="0%"
-                            android:textColor="@color/color_dancheong_dark"
+                            android:textColor="?attr/colorPrimary"
                             android:textAppearance="?attr/textAppearanceTitleLarge"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -116,7 +129,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
-                    android:background="@color/color_gold"
+                    android:background="?attr/colorSecondary"
                     app:layout_constraintTop_toBottomOf="@id/container_stats" />
 
                 <LinearLayout
@@ -131,7 +144,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_streak"
-                        app:tint="@color/color_gold" />
+                        app:tint="?attr/colorSecondary" />
 
                     <TextView
                         android:id="@+id/tv_streak_days"
@@ -140,7 +153,7 @@
                         android:layout_marginStart="8dp"
                         android:text="0일 연속 학습 중!"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
-                        android:textColor="@color/color_dancheong_red"
+                        android:textColor="?attr/colorPrimary"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -155,7 +168,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:visibility="gone"
-            app:cardBackgroundColor="@color/color_surface_card"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +187,7 @@
                     android:layout_height="wrap_content"
                     android:text="최근 점수: 80점"
                     android:textAppearance="?attr/textAppearanceBodyLarge"
-                    android:textColor="@color/color_ink"
+                    android:textColor="?attr/colorOnSurface"
                     android:textStyle="bold" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -187,8 +200,8 @@
             android:layout_marginTop="32dp"
             android:text="기본 퀴즈 시작"
             android:textSize="18sp"
-            android:backgroundTint="@color/color_jokbit"
-            android:textColor="@color/md_theme_on_primary"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary"
             app:cornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -201,8 +214,8 @@
             android:layout_marginTop="16dp"
             android:text="심화 퀴즈 시작"
             android:textSize="18sp"
-            android:backgroundTint="@color/color_dancheong_red"
-            android:textColor="@color/md_theme_on_primary"
+            android:backgroundTint="?attr/colorSecondary"
+            android:textColor="?attr/colorOnSecondary"
             app:cornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

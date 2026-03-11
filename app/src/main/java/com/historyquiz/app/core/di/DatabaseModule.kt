@@ -10,12 +10,14 @@ import org.koin.dsl.module
 val databaseModule = module {
 
     // Room Database
+    // TASK-014: createFromAsset("quiz.db") — 앱 설치 시 assets/quiz.db를 DB 디렉토리로 자동 복사
     single {
         Room.databaseBuilder(
             androidContext(),
             AppDatabase::class.java,
             AppDatabase.DATABASE_NAME
         )
+            .createFromAsset("quiz.db")
             .fallbackToDestructiveMigration()
             .build()
     }

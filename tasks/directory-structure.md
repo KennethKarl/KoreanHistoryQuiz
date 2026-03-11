@@ -24,8 +24,16 @@ TEST-HISTORY_QUIZofKorea_AOS/           ← Android 저장소 루트
 ├── reports/                             ← 세션 간 리포트
 ├── memos/
 ├── skills/
-├── scripts/
-│   └── notify-telegram.sh
+├── scripts/                             ← QUIZ DB 빌드 파이프라인
+│   ├── build_quiz_db.py               ← 메인 파이프라인 (TASK-010)
+│   ├── crop_all.py                    ← 이미지 크롭 래퍼 (TASK-012)
+│   ├── notify-telegram.sh
+│   └── output/                        ← 스크립트 산출물 (gitignore 권장)
+│       ├── parsed_questions.json      ← 중간 파싱 결과
+│       ├── unclassified.json          ← 미분류 문제 목록 (TASK-011)
+│       ├── manual_era_tags.csv        ← 수동 태깅 시트 (TASK-011)
+│       ├── quiz.db                    ← 최종 SQLite DB → assets/ 복사
+│       └── images/                    ← 크롭 이미지 임시 저장소
 ├── deploy/
 ├── .session-status.json
 ├── CLAUDE.md
@@ -250,10 +258,10 @@ SplashFragment
 LoginFragment → HomeFragment (로그인 성공)
 
 HomeFragment (BottomNavigation 또는 Top-level)
-  ├── 퀴즈 시작 → DifficultySelectFragment
-  │                 → QuizPlayFragment → QuizResultFragment
-  │                                        ├── 다시 풀기 → DifficultySelectFragment
-  │                                        └── 홈으로 → HomeFragment (popBackStack)
+  ├── 기본 퀴즈 시작 → QuizPlayFragment(level=basic) → QuizResultFragment
+  │                                                         ├── 다시 풀기 → QuizPlayFragment(동일 level)
+  │                                                         └── 홈으로 → HomeFragment (popBackStack)
+  ├── 심화 퀴즈 시작 → QuizPlayFragment(level=advanced) → QuizResultFragment
   ├── 통계 탭 → StatisticsFragment
   └── 내 정보 탭 → SettingsFragment
                       └── 로그아웃 → LoginFragment (popBackStack all)
